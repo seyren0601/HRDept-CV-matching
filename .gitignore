@@ -3,3 +3,12 @@ CV for HBU
 data
 results/
 huggingface_token.txt
+BE/submitted_pdfs
+BE/.idea/
+BE/.vscode/
+BE/__pycache__/
+BE/dist/
+BE/.coverage*
+BE/htmlcov/
+BE/.tox/
+BE/docs/_build/
