@@ -1,0 +1,80 @@
+Yêu cầu:
+- ngôn ngữ lập trình: Chỉ dùng java (spring boot) hoặc python (flask, django)
+- Từng step phải có documentation cụ thể
+- Mỗi step phải viết theo kiểu module để cho những project có yêu cầu tương tự có thể xài được 
+(vd: module: bạn A xây dựng module bóc tách dữ liệu thì bạn B có thể kéo về và tái sử dụng được module của bạn A cho đỡ mất thời gian)
+- Sinh viên có thể kết hợp nhiều model AI để đạt được kết quả tốt nhất.
+
+1. suggestion (cho Ứng viên)
+- step 1: bóc tách dữ liệu từ file cv
+- step 2: group lại raw data theo: thông tin cá nhân, kinh nghiệm làm việc, học vấn, các skill khác (nếu có)
+	+ thông tin cá nhân (tên, sđt, email, ...)
+	+ kinh nghiệm (đơn vị, thời gian, skill, ...)
+	+ học vấn
+	+ các skill khác
+- step 3: từ dữ liệu ở step 2, tìm 1 hoặc nhiều model AI thích hợp để phân tích các kinh nghiệm làm việc + skill của ứng viên
+với nhu cầu của thị trường (lấy từ bộ data có sẵn) để biết được vị trí của ứng viên đang apply thiếu những skill nào 
+đang hot trên thị trường để ứng viên có thể cập nhật vào cv nhằm thu hút nhà tuyển dụng
+
+2. maching cv with job description (cho Ứng viên)
+- step 1: bóc tách dữ liệu từ file cv
+- step 2: group lại raw data theo: thông tin cá nhân, kinh nghiệm làm việc, học vấn, các skill khác (nếu có)
+- step 3: từ jd (job description) của company, tìm model AI thích hợp để bóc tách ra thành những yêu cầu về kỹ năng / trình độ cụ thể
+- step 4: từ dữ liệu ở step 2 và step 3, tìm 1 hoặc nhiều model AI thích hợp để phân tích các yêu cầu từ jd (job description) 
+của company để biết được Ứng viên đang thiếu những skill nào từ jd của company để ứng viên có thể điền vô cv khi apply 
+nhằm thu hút nhà tuyển dụng chú ý đến cv của ứng viên
+
+########### IDEAS
+- step 1 (both):
++ Use OCR/Transformer models to transcript raw texts/text lines:
+	[EasyOCR]
+		Open source (Re-trainable, Finetuneable) OCR model. Used for general use cases (detect text lines in images)
+		https://github.com/JaidedAI/EasyOCR?tab=readme-ov-file
+	[Surya]
+		Closed source (Non-trainable) OCR model. Specialized in pdf/image to text lines
+		Need to pay for commercial uses
+		https://github.com/VikParuchuri/surya
+	[Nougat] (base/small)
+		Open source OCR model. Specialized in essay/research paper to text lines
+		Having trouble transcripting colored images (tested with colored CV, small model). Usable with black-and-white images
+		https://huggingface.co/facebook/nougat-small
+		https://huggingface.co/facebook/nougat-base
+	[trocr]
+		Open source OCR model. Specialized in essay/research paper to text lines
+		Must be re-trained before put to use
+		Not yet tested
+		
+- step 2 (both):
++ Use LM Studio to fetch and test LLM models (probably be able to write APIs too)
++ Use LLM to parse raw data into specific fields (json/xml/html format)
+	[GPT 4o]
+		Highly accurate, extremely expensive
+		Finetuneable
+		Not hostable locally
+		https://platform.openai.com
+	[Llama]
+		Not yet tested
+		Hostable locally
+		Finetuneable
+		https://www.llama.com/
+	... and other LLM on HuggingFace (tag: Text Generation)
+
+step 3 and 4: wait for dataset...
+
+########## REFERENCES
+- How to Fine tune LLMs on PDF documents
+https://discuss.huggingface.co/t/fine-tune-llms-on-pdf-documents/71374/9
+
+
+
+########## Notes
+
+OVERALL OUTPUT:
+[1] json of cv summary
+[2] string of model's suggestion based on "hot" skill (json taken from database) and the cv summary (json taken from database)
+Task 1.2
+	push data to database
+
+Task 1.3 
+	self-write some scenarios (e.g. nowadays, the "hot" skill in IT are [AI Engineering, React, React Native, Golang, ...])
+	then test with data generated (pdf summary) to see if the model can generate
