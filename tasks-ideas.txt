@@ -78,3 +78,23 @@ Task 1.2
 Task 1.3 
 	self-write some scenarios (e.g. nowadays, the "hot" skill in IT are [AI Engineering, React, React Native, Golang, ...])
 	then test with data generated (pdf summary) to see if the model can generate
+
+
+
+13/11
+----------------------------------------
+Known info about trend (IT):
+Ngành nghề
+	Vị trí
+	Level
+	Framework, language
+Known info of client:
+	Vị trí mong muốn
+	Level
+
+
+pdf -> table
+python background_job xử lý mỗi file pdf mới -> khi xong notify lên kafka topic
+
+
+

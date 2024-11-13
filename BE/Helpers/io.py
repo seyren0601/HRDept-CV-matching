@@ -12,6 +12,7 @@ def save_pdf(file:FileStorage):
         file.save(file_path)
     except:
         raise Exception("File saving exception. filepath:{file_path}")
+    return file_path
     
 def update_pdf(user_id:int, file:FileStorage):
     old_file_path = db.find_user_filepath(user_id)
@@ -24,7 +25,7 @@ def update_pdf(user_id:int, file:FileStorage):
         file.save(file_path)
     except:
         raise Exception("File saving exception. filepath:{file_path}")
+    return file_path
     
 def get_storage_filepath(file:FileStorage):
     return str(STORAGE_DIRECTORY + secure_filename(file.filename))
-        

@@ -2,6 +2,8 @@ from flask import Flask
 from flask import request
 from flask import Response
 from Controllers.pdf_submission import pdf_submit
+from Controllers.llm_model import get_summary
+from Controllers.llm_model import get_json
 from Helpers import io
 from werkzeug.utils import secure_filename
 
@@ -28,5 +30,16 @@ def pdf():
     
 @app.route("/pdf_summary", methods=['GET'])
 def pdf_summary():
-    user_id = request.args.get('id')
-    
+    user_id = request.args.get('user_id', -1, type=int)
+    if user_id == -1:
+        return Response(response="Invalid user id", status=400)
+    summary = get_summary(user_id)
+    return summary
+
+@app.route("/pdf_json", methods=['GET'])
+def pdf_json():
+    user_id = request.args.get('user_id', -1, type=int)
+    if user_id == -1:
+        return Response(response="Invalid user id", status=400)
+    json = get_json(user_id)
+    return json

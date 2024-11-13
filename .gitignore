@@ -14,3 +14,4 @@ BE/.tox/
 BE/docs/_build/
 *.pyc
 playground.ipynb
+*.env
