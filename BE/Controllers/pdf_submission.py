@@ -3,8 +3,9 @@ from Helpers import io
 from DB import db
 
 def pdf_submit(user_id:int, file:FileStorage, ocp:str='IT'):
-    io.save_pdf(file)
     if db.find_user(user_id):
-        db.update_user(user_id, io.STORAGE_DIRECTORY + file.filename, ocp)
+        io.update_pdf(user_id, file)
+        db.update_user(user_id, io.get_storage_filepath(file), ocp)
     else:
-        db.create_user(user_id, io.STORAGE_DIRECTORY + file.filename, ocp)
+        io.save_pdf(file)
+        db.create_user(user_id, io.get_storage_filepath(file), ocp)
