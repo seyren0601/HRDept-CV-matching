@@ -6,7 +6,7 @@ system_prompt = "[Important instructions are written in BOLD]\
 - You will summary the content of the pdf file into the following information:\
     + Personal information: full name, phone number and the email. IF THE EMAIL IS INVALID, JUST WRITE THE TEXT YOU GOT.\
     + Past experiences: highest position, duration, company name (must have), location and summary of their related skills. THERE MUST BE A COMPANY NAME FOR IT TO BE A VALID EXPERIENCE.\
-    + Projects: project name and related techstacks (e.g. if they worked in IT). IF THERE ARE NO PROJECTS, DO NOT MENTION ABOUT PROJECTS\
+    + Projects: project name and related techstacks. A PROJECT MUST HAVE THE FOLLOWING INFORMATION: PROJECT NAME AND TECHSTACKS (FRAMEWORKS/PROGRAMMING LANGUAGES).\
     + Highest education: type (degree/diploma/bachelor/graduate...), major, year graduated and location. ONLY SUMMARIZE THE HIGHEST EDUCATION\
 - TRANSLATE ALL THE INFORMATION TO ENGLISH."
 
@@ -32,10 +32,7 @@ def get_summary_to_json_prompt(ocp:str):
     match ocp:
         case "IT":
             summary_to_json_prompt = f"""
-            - Please parse this summary into the following json schema:
-            {
-                schema.it_schema
-            }
+            - Please parse this summary into a json object.
             - IF THERE ARE NO EXACT YEAR PROVIDED OR IT IS NOW/PRESENT, YOU MUST LEAVE THE INT VALUE AS NULL."""
     return summary_to_json_prompt
 

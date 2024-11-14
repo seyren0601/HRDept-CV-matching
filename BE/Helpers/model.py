@@ -34,7 +34,8 @@ def summary_to_json(summary:str, ocp:str):
                 "role": "user",
                 "content": prompts.get_summary_to_json_prompt(ocp)
             }
-        ]
+        ],
+        response_format=prompts.schema.it_schema_obj
     )
     return completion.choices[0].message.content
 
@@ -52,8 +53,9 @@ def json_double_check(summary:str, json_string:str, ocp:str):
             {
                 "role": "user",
                 "content": double_check_prompt
-            }
-        ]
+            },
+        ],
+        response_format=prompts.schema.it_schema_obj
     )
 
     return completion.choices[0].message.content
